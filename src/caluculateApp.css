@@ -1,0 +1,17 @@
+.calculateContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: fit-content;
+  gap: 10px;
+  margin: auto;
+}
+
+#taxExcluded {
+  font-weight: lighter;
+  color: blue;
+}
+#taxIncluded {
+  font-weight: bold;
+  color: red;
+}
