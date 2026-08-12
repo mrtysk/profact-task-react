@@ -23,7 +23,7 @@ function App() {
   }, [priceText, quantityText]);
 
   const taxIncluded = useMemo(() => {
-    const result = taxExcluded * 1.1;
+    const result = Number(taxExcluded) * 1.1;
     return result.toFixed(2);
   }, [taxExcluded]);
 
@@ -79,4 +79,4 @@ function App() {
   );
 }
 
-export default App;
+// export default App;
