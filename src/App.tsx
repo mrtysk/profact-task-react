@@ -1,82 +1,54 @@
 import { useState } from "react";
-import { useMemo } from "react";
-import "./counterApp.css";
-import "./caluculateApp.css";
+import "./App.css";
+import CounterButton from "./components/CounterButton";
+import CommentItem from "./components/CommentItem";
 
 function App() {
   const [count, setCount] = useState(0);
 
-  function increment() {
+  const incrementCount = () => {
     setCount(count + 1);
-  }
-
-  function reset() {
-    setCount(0);
-  }
-
-  const [priceText, setPriceText] = useState("");
-  const [quantityText, setQuantityText] = useState("");
-
-  const taxExcluded = useMemo(() => {
-    const result = Number(priceText) * Number(quantityText);
-    return result.toFixed(2);
-  }, [priceText, quantityText]);
-
-  const taxIncluded = useMemo(() => {
-    const result = Number(taxExcluded) * 1.1;
-    return result.toFixed(2);
-  }, [taxExcluded]);
-
-  const clear = () => {
-    setPriceText("");
-    setQuantityText("");
   };
+
   return (
-    <>
-      <div className="counterContainer">
-        <p className="p-big">カウンターアプリ</p>
-
-        <button onClick={increment}>ここを押す</button>
-        <button onClick={reset}>リセット</button>
-
-        <p>現在の数字: {count}</p>
-        {count % 10 === 0 && count > 0 && (
-          <p id="achievement">{count} 回クリック達成！</p>
-        )}
+    <div className="appContainer">
+      <p>カウンターアプリ</p>
+      <CounterButton label="カウントを増やす" onClick={incrementCount} />
+      <p>現在の数字: {count}</p>
+      {count % 10 === 0 && count > 0 && (
+        <p>
+          <strong>{count} 回クリック達成！</strong>
+        </p>
+      )}{" "}
+      <div className="commentSection">
+        <CommentList />
       </div>
-
-      <div className="calculateContainer">
-        <p className="p-big">合計専用計算機</p>
-        <p>価格: {priceText} 円</p>
-        <input
-          type="number"
-          value={priceText}
-          onChange={(event) => setPriceText(event.target.value)}
-          placeholder="価格を入力"
-          min="1"
-        />
-
-        <p>数量: {quantityText} 個</p>
-        <input
-          type="number"
-          value={quantityText}
-          onChange={(event) => setQuantityText(event.target.value)}
-          placeholder="数量を入力"
-          min="1"
-        />
-
-        <button onClick={clear}>クリア</button>
-        <div>
-          {priceText !== "" && quantityText !== "" && (
-            <>
-              <p id="taxExcluded">税抜:{taxExcluded}円</p>
-              <p id="taxIncluded">税込:{taxIncluded}円</p>
-            </>
-          )}
-        </div>
-      </div>
-    </>
+    </div>
   );
 }
 
-// export default App;
+function CommentList() {
+  const [comments, setComments] = useState([
+    { id: 1, author: "Alice", text: "素晴らしい記事です！" },
+    { id: 2, author: "Bob", text: "面白かったです！！！" },
+    { id: 3, author: "Noah", text: "楽しく読ませていただきました。" },
+    { id: 4, author: "Alice", text: "ためになる！" },
+    { id: 5, author: "Bob", text: "興味深い。" },
+  ]);
+
+  return (
+    <div>
+      <p>コメントリスト</p>
+
+      {comments.map((comment) => (
+        <CommentItem
+          key={comment.id}
+          authorName={comment.author}
+          commentText={comment.text}
+        />
+      ))}
+    </div>
+  );
+}
+
+export default App;
