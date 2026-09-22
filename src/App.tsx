@@ -1,7 +1,8 @@
 import { useState } from "react";
 import CounterButton from "./components/CounterButton";
+import CommentItem from "./components/CommentItem";
 
-function App() {
+function Counter() {
   const [count, setCount] = useState(0);
 
   const incrementCount = () => {
@@ -20,4 +21,20 @@ function App() {
   );
 }
 
-export default App;
+function CommentList() {
+  return (
+    <div className="appContainer">
+      <p className="appTitle">コメントリスト</p>
+      <CommentItem />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <>
+      <Counter />
+      <CommentList />
+    </>
+  );
+}
