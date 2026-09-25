@@ -22,10 +22,25 @@ function Counter() {
 }
 
 function CommentList() {
+  const comments = [
+    { id: 1, author: "Alice", text: "素晴らしい記事です！" },
+    { id: 2, author: "Bob", text: "面白かったです！！！" },
+    { id: 3, author: "Noah", text: "楽しく読ませていただきました。" },
+    { id: 4, author: "Alice", text: "ためになる！" },
+    { id: 5, author: "Bob", text: "興味深い。" },
+  ];
   return (
     <div className="appContainer">
       <p className="appTitle">コメントリスト</p>
-      <CommentItem />
+      <ul>
+        {comments.map((comment, index) => (
+          <CommentItem
+            key={index}
+            author={comment.author}
+            text={comment.text}
+          />
+        ))}
+      </ul>
     </div>
   );
 }
