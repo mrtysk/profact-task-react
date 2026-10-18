@@ -1,14 +1,10 @@
 type Props = {
   label: string;
-  onClick(): void;
+  onClick: () => void;
 };
 
 function CounterButton({ label, onClick }: Props) {
-  const handleClick = () => {
-    onClick();
-  };
-
-  return <button onClick={handleClick}>{label}</button>;
+  return <button onClick={onClick}>{label}</button>;
 }
 
 export default CounterButton;

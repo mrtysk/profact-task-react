@@ -7,14 +7,14 @@ function Counter() {
   const [count, setCount] = useState(0);
 
   function countUp() {
-    setCount(count + 1);
+    setCount((prev) => prev + 1);
   }
 
   return (
     <div className="appBorder">
       <p className="appTitle">カウンターアプリ</p>
       <p>現在の数字：{count}</p>
-      {count !== 0 && count % 10 === 0 ? <p>{count}回クリック達成！</p> : ""}
+      {count !== 0 && count % 10 === 0 ? <p>{count}回クリック達成！</p> : null}
       <CounterButton label="+1カウント" onClick={countUp} />
     </div>
   );
@@ -29,20 +29,18 @@ const commentData = [
 ];
 
 function CommentList() {
-  const pickedData = [];
-  for (let i = 0; i < commentData.length; i++) {
-    pickedData.push(
-      <CommentItem
-        key={commentData[i].id}
-        text={commentData[i].text}
-        author={commentData[i].author}
-      />,
-    );
-  }
   return (
     <div className="appBorder">
       <p className="appTitle">コメントリスト</p>
-      <ul>{pickedData}</ul>
+      <ul>
+        {commentData.map((comment) => (
+          <CommentItem
+            key={comment.id}
+            text={comment.text}
+            author={comment.author}
+          />
+        ))}
+      </ul>
     </div>
   );
 }
