@@ -13,7 +13,7 @@ function Counter() {
       <p className="appTitle">カウンターアプリ</p>
       <button onClick={countUp}>+1カウント</button>
       <p>現在の数字：{count}</p>
-      {count !== 0 && count % 10 === 0 ? <p>{count}回クリック達成！</p> : ""}
+      {count !== 0 && count % 10 === 0 ? <p>{count}回クリック達成！</p> : null}
     </div>
   );
 }
@@ -29,12 +29,14 @@ function Calculator() {
     setQuantity(event.target.value);
   }
 
+  const TAX_RATE = 1.1;
+
   function taxExclusive() {
-    return Number(price) * Number(quantity);
+    return Math.floor(Number(price) * Number(quantity));
   }
 
   function taxInclusive() {
-    return Number(price) * 1.1 * Number(quantity);
+    return Math.floor(Number(price) * TAX_RATE * Number(quantity));
   }
 
   return (
@@ -46,23 +48,21 @@ function Calculator() {
         type="number"
         value={price}
         placeholder="値段を入力"
-      ></input>
+      />
       <p>数量:</p>
       <input
         onChange={handleInputQuantity}
         type="number"
         value={quantity}
         placeholder="数量を入力"
-      ></input>
+      />
 
-      {price !== "" && quantity !== "" ? (
+      {price !== null && quantity !== null ? (
         <>
           <p>{taxExclusive()}円</p>
           <p>税込{taxInclusive()}円</p>
         </>
-      ) : (
-        ""
-      )}
+      ) : null}
     </div>
   );
 }
