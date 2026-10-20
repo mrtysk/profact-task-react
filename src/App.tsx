@@ -57,7 +57,7 @@ function Calculator() {
         placeholder="数量を入力"
       />
 
-      {price !== null && quantity !== null ? (
+      {price !== "" && quantity !== "" ? (
         <>
           <p>{taxExclusive()}円</p>
           <p>税込{taxInclusive()}円</p>
